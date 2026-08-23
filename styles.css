@@ -1,0 +1,233 @@
+.weight {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.ptbWidget {
+	box-sizing: border-box;
+  	container: widget / inline-size;
+}
+
+.ptbWeight {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 20px;
+}
+
+.ptbMonth {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}
+
+.ptbWidgetShapeBasic {
+	max-width: 400px;
+	aspect-ratio: 1 / 1;
+	background: var(--background-secondary);
+	border-radius: 38px;
+}
+
+.weightIcon {
+	aspect-ratio: 1 / 1;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.25rem;
+	background: #1292FA;
+	color: #FFFFFF;
+	border-radius: 50%;
+}
+
+.weightDiff {
+	display: flex;
+	flex-direction: row;
+}
+
+.weightGood {
+	color: var(--color-green);
+}
+
+.weightBad {
+	color: var(--color-red);
+}
+
+.weightData {
+	margin-top: auto;
+}
+
+.calendarGrid, .weekdays {
+  	display: grid;
+  	grid-template-columns: auto auto auto auto auto auto auto;
+}
+
+.calendarGrid {
+	flex-grow: 1;
+}
+
+.calendarItem, .weekdays * {
+	display: flex;
+	align-items: center;
+	justify-self: center;
+}
+
+.weekdays * {
+	color: var(--text-muted);
+}
+
+.monthTitle {
+	color: var(--color-red);
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.today {
+	position: relative;
+  	z-index: 1;
+	color: white;
+	font-weight: bold;
+}
+
+.today::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	aspect-ratio: 1;
+	left: 0;
+	background-color: var(--color-red);
+	border-radius: 100%;
+  	width: 150%;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: -1;
+}
+
+.ptbGridWidget {
+	display: grid;
+  	grid-template-columns: repeat(1, 1fr);
+	gap: 8px;
+	align-items: start;
+}
+
+.block-language-ptb-widget {
+  	container: widgetBlock / inline-size;
+}
+
+@container widgetBlock (min-width: 420px) {
+	.ptbGridWidget {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@container widgetBlock (min-width: 700px) {
+	.ptbGridWidget {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.ptbWeightPill {
+	display: flex;
+	flex-direction: row;
+	background: var(--background-secondary);
+	border-radius: 38px;
+	padding: 20px;
+	align-items: center;
+	gap: 8px;
+}
+
+.ptbWeightPill .weightData {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	flex-grow: 1;
+	align-items: center;
+}
+
+.ptbWeightPill .weight {
+	flex-grow: 1;
+}
+
+.weightDiffPill {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	color: white;
+	padding: 2px 8px 2px 4px;
+	border-radius: 20px;
+	width: min-content;
+	font-size: 0.9rem;
+	align-items: center;
+}
+
+.weightDiffPillArrow {
+	height: 1rem;
+	width: min-content;
+}
+
+.weightDiffText {
+	font-size: .75rem;
+	color: var(--text-muted);
+}
+
+.weightDiffPillWrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+}
+
+.weightDiffPill.weightBad {
+	background: var(--color-red)
+}
+
+.weightDiffPill.weightGood {
+	background: var(--color-green)
+}
+
+@container widget (max-width: 300px) {
+	.weightDiffPillWrapper {
+		display: none;
+	}
+}
+
+.title > h3 {
+	margin: 0px;
+}
+
+.subtitle {
+	color: var(--text-muted)
+}
+
+.iconAndTitle {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.todayDetails {
+	font-size: 2.5rem;
+}
+
+.todayWeekday {
+	color: var(--color-red);
+}
+
+.todayMonth {
+	color: var(--text-muted);
+}
+
+.ptbToday {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    justify-content: center;
+}
+
+.todayNumber {
+	font-size: 8rem;
+	font-weight: bold;
+	line-height: 1;
+}
