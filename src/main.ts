@@ -1,8 +1,4 @@
 import {
-	Editor,
-	MarkdownView,
-	type MarkdownFileInfo,
-	Notice,
 	Plugin,
 } from 'obsidian';
 import {
