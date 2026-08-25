@@ -9,20 +9,14 @@
 		date: string;
   	}
 	
-
 	let { service, date }: Props = $props();
 
-	var mateialDate: Date;
-	if (date) {
-		mateialDate = service.formatYMD(date)
-	} else {
-		mateialDate = new Date()
-	}
+	let mateialDate = $derived(date ? service.formatYMD(date) : new Date())
 
-	let weight = service.getWeightForDate(mateialDate)?.weight
+	let weight = $derived(service.getWeightForDate(mateialDate)?.weight)
 	let weightUnit = "lbs"; // CHANGE THIS
 
-	let diffs = service.getWeightDiffs(mateialDate);
+	let diffs = $derived(service.getWeightDiffs(mateialDate))
 </script>
 
 <div class="ptbWidget ptbWeightPill">

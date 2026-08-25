@@ -10,22 +10,16 @@
 		date: string;
   	}
 
-
 	let { service, date }: Props = $props();
 
-	var mateialDate: Date;
-	var subtitle: string | undefined = undefined
-	if (date) {
-		mateialDate = service.formatYMD(date)
-		subtitle = `for ${date}`
-	} else {
-		mateialDate = new Date()
-	}
+	let mateialDate = $derived(date ? service.formatYMD(date) : new Date())
+	let subtitle = $derived(date ? `for ${date}` : undefined)
 
-	let weight = service.getWeightForDate(mateialDate)?.weight
+	let weight = $derived(service.getWeightForDate(mateialDate)?.weight)
 	let weightUnit = "lbs"; // CHANGE THIS
 
-	let diffs = service.getWeightDiffs(mateialDate);
+	let diffs = $derived(service.getWeightDiffs(mateialDate))
+
 </script>
 
 <div class="ptbWidget ptbWidgetShapeBasic ptbWeight ptbWidgetsWidgetFrame">
