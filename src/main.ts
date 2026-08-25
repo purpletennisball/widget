@@ -23,8 +23,8 @@ import { CalendarService } from './CalendarService';
 import { TimerService } from './widgets/timer/TimerService'
 
 interface Widget {
-	props: { [key: string]: any }
-	element: any
+	props: { [key: string]: unknown }
+	element: unknown
 }
 
 class InvalidWidgetError extends Error {
@@ -76,14 +76,14 @@ export default class PTBWidgetPlugin extends Plugin {
 		}
 	}}
 
-	parseGridProps(source: string): { [key: string]: any } {
+	parseGridProps(source: string): { [key: string]: unknown } {
 		// Remove "grid" line.
-		var newSource = source.substring(source.indexOf('\n') + 1);
+		let newSource = source.substring(source.indexOf('\n') + 1);
 
 		// Split by empty lines
-		var widgetOptions = newSource.split(/\r?\n\s*\r?\n/);
+		let widgetOptions = newSource.split(/\r?\n\s*\r?\n/);
 
-		var props: { widgets: [Widget, { [key: string]: any }][] } = { widgets: [] }
+		let props: { widgets: [Widget, { [key: string]: unknown }][] } = { widgets: [] }
 
 		for (let widgetOption of widgetOptions) {
 			props.widgets.push(this.parseOptions(widgetOption))
@@ -92,7 +92,7 @@ export default class PTBWidgetPlugin extends Plugin {
 		return props
 	}
 
-	parseOptions(source: string): [Widget, { [key: string]: any }] {
+	parseOptions(source: string): [Widget, { [key: string]: unknown }] {
 		let options = source.split(/\r?\n/)
 		let widgetType = options[0]
 		options.shift()
@@ -108,7 +108,7 @@ export default class PTBWidgetPlugin extends Plugin {
 			return [widget, props]
 		}
 
-		var props = widget.props
+		let props = widget.props
 
 		for (let option of options) {
 			if (option.startsWith("date")) {

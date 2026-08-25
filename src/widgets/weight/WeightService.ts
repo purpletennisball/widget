@@ -87,9 +87,9 @@ export class WeightService {
 
 	getFileCTime(file: TFile): number {
 		if (this.settings.dateSetting === 'custom-property') {
-			let dateValue = this.app.metadataCache.getFileCache(file)?.frontmatter?.[this.settings.dateProperty];
+			let dateValue: unknown = this.app.metadataCache.getFileCache(file)?.frontmatter?.[this.settings.dateProperty];
 
-			if (dateValue) {
+			if (typeof dateValue === "string") {
 				return this.formatYMD(dateValue).getTime();
 			}
 		}
@@ -106,11 +106,11 @@ export class WeightService {
 	 */
 	getWeightHistory(): WeightLog[] {
 		const rawWeights = this.app.vault.getMarkdownFiles()
-			.map(file => ({
-				file,
-				weight: this.app.metadataCache.getFileCache(file)?.frontmatter?.weight
-			}))
-			.filter(note => note.weight !== undefined);
+			.map(file => {
+				const weight: unknown = this.app.metadataCache.getFileCache(file)?.frontmatter?.weight;
+				return { file, weight };
+			})
+			.filter((note): note is { file: TFile; weight: number } => typeof note.weight === "number");
 
 		const weightLogs: WeightLog[] = rawWeights.map(note => ({
 			file: note.file,
