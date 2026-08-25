@@ -75,7 +75,7 @@ export default class PTBWidgetPlugin extends Plugin {
 		// Split by empty lines
 		var widgetOptions = newSource.split(/\r?\n\s*\r?\n/);
 
-		var props = {widgets: []}
+		var props: { widgets: [Widget, { [key: string]: any }][] } = { widgets: [] }
 
 		for (let widgetOption of widgetOptions) {
 			props.widgets.push(this.parseOptions(widgetOption))
