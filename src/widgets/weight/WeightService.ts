@@ -107,10 +107,10 @@ export class WeightService {
 	getWeightHistory(): WeightLog[] {
 		const rawWeights = this.app.vault.getMarkdownFiles()
 			.map(file => {
-				const weight: unknown = this.app.metadataCache.getFileCache(file)?.frontmatter?.weight;
-				return { file, weight };
+				let weight: unknown = this.app.metadataCache.getFileCache(file)?.frontmatter?.weight
+				return {file, weight}
 			})
-			.filter((note): note is { file: TFile; weight: number } => typeof note.weight === "number");
+			.filter(note => note.weight !== undefined);
 
 		const weightLogs: WeightLog[] = rawWeights.map(note => ({
 			file: note.file,
