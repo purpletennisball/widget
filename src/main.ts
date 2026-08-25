@@ -24,10 +24,46 @@ import { TimerService } from './widgets/timer/TimerService'
 
 export default class PTBWidgetPlugin extends Plugin {
 	settings!: PTBWidgetPluginSettings;
-	weightService!: WeightService;
-	calendarService: CalendarService;
+	public weightService!: WeightService;
+	public calendarService!: CalendarService;
+	public timerService!: TimerService;
 
-	parseGridProps(source: string, widgets: any): any {
+	public get WIDGETS() { return {
+		"weight": {
+			"props": {
+				service: this.weightService,
+			},
+			"element": Weight
+		},
+		"weight-pill": {
+			"props": {
+				service: this.weightService,
+			},
+			"element": WeightPill
+		},
+		"month": {
+			"props": {
+				service: this.calendarService,
+			},
+			"element": MonthWidget
+		},
+		"grid": {
+			"props": {},
+			"element": Grid
+		},
+		"timer": {
+			"props": {
+				service: this.timerService
+			},
+			"element": Timer
+		},
+		"today": {
+			"props": {},
+			"element": Today
+		}
+	}}
+
+	parseGridProps(source: string): any {
 		// Remove "grid" line.
 		var newSource = source.substring(source.indexOf('\n') + 1);
 
@@ -37,25 +73,25 @@ export default class PTBWidgetPlugin extends Plugin {
 		var props = {widgets: []}
 
 		for (let widgetOption of widgetOptions) {
-			props.widgets.push(this.parseOptions(widgetOption, widgets))
+			props.widgets.push(this.parseOptions(widgetOption))
 		}
 
 		return props
 	}
 
-	parseOptions(source: string, widgets: any): [any, any] {
+	parseOptions(source: string): [any, any] {
 		let options = source.split(/\r?\n/)
 		let widgetType = options[0]
 		options.shift()
 
-		let widget = widgets[widgetType]
+		let widget = this.WIDGETS[widgetType]
 
 		if (widgetType == "grid") {
-			let props = this.parseGridProps(source, widgets) 
+			let props = this.parseGridProps(source) 
 			return [widget, props]
 		}
 
-		let props = widget.props
+		var props = widget.props
 
 		for (let option of options) {
 			if (option.startsWith("date")) {
@@ -76,45 +112,10 @@ export default class PTBWidgetPlugin extends Plugin {
 		this.calendarService = new CalendarService(this.app, this.settings)
 		this.timerService = new TimerService(this.app, this.settings)
 
-		const WIDGETS = {
-			"weight": {
-				"props": {
-					service: this.weightService,
-				},
-				"element": Weight
-			},
-			"weight-pill": {
-				"props": {
-					service: this.weightService,
-				},
-				"element": WeightPill
-			},
-			"month": {
-				"props": {
-					service: this.calendarService,
-				},
-				"element": MonthWidget
-			},
-			"grid": {
-				"props": {},
-				"element": Grid
-			},
-			"timer": {
-				"props": {
-					service: this.timerService
-				},
-				"element": Timer
-			},
-			"today": {
-				"props": {},
-				"element": Today
-			}
-		}
-
 		this.registerMarkdownCodeBlockProcessor("ptb-widget", (source, el, ctx) => {
 			el.empty();
 
-			let [widget, props] = this.parseOptions(source, WIDGETS)
+			let [widget, props] = this.parseOptions(source)
 
 			mount(widget.element, {
 				target: el,
