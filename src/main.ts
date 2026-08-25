@@ -11,7 +11,7 @@ import {
 	type PTBWidgetPluginSettings,
 	SettingTab,
 } from './settings';
-import { mount } from 'svelte';
+import { mount, type Component } from 'svelte';
 import { WeightService } from './widgets/weight/WeightService';
 import MonthWidget from './widgets/month/MonthWidget.svelte';
 import Weight from './widgets/weight/Weight.svelte';
@@ -24,7 +24,7 @@ import { TimerService } from './widgets/timer/TimerService'
 
 interface Widget {
 	props: { [key: string]: unknown }
-	element: unknown
+	element: Component<any>
 }
 
 class InvalidWidgetError extends Error {
