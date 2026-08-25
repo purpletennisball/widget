@@ -24,7 +24,7 @@ import { TimerService } from './widgets/timer/TimerService'
 
 interface Widget {
 	props: { [key: string]: unknown }
-	element: Component<any>
+	element: Component<Record<string, unknown>>
 }
 
 class InvalidWidgetError extends Error {
