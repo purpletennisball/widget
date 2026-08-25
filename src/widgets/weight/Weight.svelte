@@ -42,7 +42,7 @@
 			<span class="weight">{weight}{weightUnit}</span>
 		{/if}
 		{#each diffs as diff}
-			<WeightDifferenceView diff={diff} />
+			<WeightDifferenceView diff={diff} pilled={false} />
 		{/each}
 	</div>
 </div>

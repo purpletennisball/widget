@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NoWeight from "./NoWeight.svelte";
-	import WeightDifferencePill from "./WeightDifferencePill.svelte";
+	import WeightDifferenceView from './WeightDifferenceView.svelte'
 	import WeightIcon from "./WeightIcon.svelte";
 	import { type WeightService } from "./WeightService";
 
@@ -34,7 +34,7 @@
 			<span class="weight">{weight}{weightUnit}</span>
 		{/if}
 		{#each diffs as diff}
-			<WeightDifferencePill diff={diff} />
+			<WeightDifferenceView diff={diff} pilled={true} />
 		{/each}
 	</div>
 </div>
