@@ -27,6 +27,14 @@ interface Widget {
 	element: any
 }
 
+class InvalidWidgetError extends Error {
+	constructor(message: string, public field?: string) {
+		super(message);
+		this.name = 'InvalidWidgetError';
+		Object.setPrototypeOf(this, InvalidWidgetError.prototype);
+	}
+}
+
 export default class PTBWidgetPlugin extends Plugin {
 	settings!: PTBWidgetPluginSettings;
 	public weightService!: WeightService;
@@ -90,6 +98,10 @@ export default class PTBWidgetPlugin extends Plugin {
 		options.shift()
 
 		let widget = this.WIDGETS[widgetType ?? "unknown"]
+
+		if (!widget) {
+			throw new InvalidWidgetError(`${widgetType} is not a valid widget`)
+		}
 
 		if (widgetType == "grid") {
 			let props = this.parseGridProps(source) 
