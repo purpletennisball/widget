@@ -22,13 +22,18 @@ import Today from './widgets/today/Today.svelte';
 import { CalendarService } from './CalendarService';
 import { TimerService } from './widgets/timer/TimerService'
 
+interface Widget {
+	props: { [key: string]: any }
+	element: any
+}
+
 export default class PTBWidgetPlugin extends Plugin {
 	settings!: PTBWidgetPluginSettings;
 	public weightService!: WeightService;
 	public calendarService!: CalendarService;
 	public timerService!: TimerService;
 
-	public get WIDGETS() { return {
+	public get WIDGETS(): { [key: string]: Widget } { return {
 		"weight": {
 			"props": {
 				service: this.weightService,
@@ -63,7 +68,7 @@ export default class PTBWidgetPlugin extends Plugin {
 		}
 	}}
 
-	parseGridProps(source: string): any {
+	parseGridProps(source: string): { [key: string]: any } {
 		// Remove "grid" line.
 		var newSource = source.substring(source.indexOf('\n') + 1);
 
@@ -79,12 +84,12 @@ export default class PTBWidgetPlugin extends Plugin {
 		return props
 	}
 
-	parseOptions(source: string): [any, any] {
+	parseOptions(source: string): [Widget, { [key: string]: any }] {
 		let options = source.split(/\r?\n/)
 		let widgetType = options[0]
 		options.shift()
 
-		let widget = this.WIDGETS[widgetType]
+		let widget = this.WIDGETS[widgetType ?? "unknown"]
 
 		if (widgetType == "grid") {
 			let props = this.parseGridProps(source) 
