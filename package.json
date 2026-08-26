@@ -1,5 +1,5 @@
 {
-	"name": "ptb-widgets",
+	"name": "widgety",
 	"version": "1.0.0",
 	"description": "Add widgets to your obsidian notes.",
 	"main": "main.js",

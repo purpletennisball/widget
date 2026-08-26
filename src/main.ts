@@ -125,7 +125,7 @@ export default class PTBWidgetPlugin extends Plugin {
 		this.calendarService = new CalendarService(this.app, this.settings)
 		this.timerService = new TimerService(this.app, this.settings)
 
-		this.registerMarkdownCodeBlockProcessor("ptb-widget", (source, el, ctx) => {
+		this.registerMarkdownCodeBlockProcessor("widgety", (source, el, ctx) => {
 			el.empty();
 
 			let [widget, props] = this.parseOptions(source)

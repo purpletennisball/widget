@@ -1,6 +1,6 @@
 {
-	"id": "ptb-widgets",
-	"name": "PTB Widgets",
+	"id": "widgety",
+	"name": "Widgety",
 	"version": "1.0.0",
 	"minAppVersion": "1.13.7",
 	"description": "Add widgets to your obsidian notes.",
