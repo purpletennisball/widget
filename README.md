@@ -1,4 +1,8 @@
-# Widgety
+<div align="center">
+<img width="512" height="248" alt="1 Logo" src="https://github.com/user-attachments/assets/d5e08819-96f2-4a05-ad64-8787b213690f" />
+</div>
+
+# Widgety 1
 
 Add widgets to your Obsidian notes.
 
