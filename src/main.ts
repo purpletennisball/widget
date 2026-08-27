@@ -76,8 +76,8 @@ export default class PTBWidgetPlugin extends Plugin {
 		// Remove "grid" line.
 		let newSource = source.substring(source.indexOf('\n') + 1);
 
-		// Split by empty lines
-		let widgetOptions = newSource.split(/\r?\n\s*\r?\n/);
+		// Split by empty lines and filter out empty options
+		let widgetOptions = newSource.split(/\r?\n\s*\r?\n/).filter(option => option.trim() !== '');
 
 		let props: { widgets: [Widget, { [key: string]: unknown }][] } = { widgets: [] }
 

@@ -6,8 +6,7 @@
 
 	let { widgets }: Props = $props();
 
-	console.log(widgets)
-</script>
+	</script>
 
 <div class="ptbWidget ptbGridWidget">
 {#each widgets as widget}
