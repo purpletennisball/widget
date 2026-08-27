@@ -35,8 +35,8 @@ Currently the plugin is not available for download within Obsidian.
 
 To add a widget to your note, use a code block with the language `widgety`:
 
-\`\`\`widgety
-widget-name-here
+\`\`\`widgety  
+widget-name-here  
 \`\`\`
 
 Replace `widget-name-here` with the name of the widget you want to use. Some widgets accept additional options:
@@ -47,21 +47,21 @@ Replace `widget-name-here` with the name of the widget you want to use. Some wid
 
 Example:
 
-\`\`\`widgety
-weight
-date 2024-01-15
+\`\`\`widgety  
+weight  
+date 2024-01-15  
 \`\`\`
 
 ### Grid Widget
 
 The grid widget allows you to arrange other widgets in a grid. Specify child widgets separated by blank lines:
 
-\`\`\`widgety
-grid
-weight
-date 2024-01-15
+\`\`\`widgety  
+grid  
+weight  
+date 2024-01-15  
 
-timer
+timer  
 \`\`\`
 
 ## Development
