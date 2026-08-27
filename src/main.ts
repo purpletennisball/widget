@@ -60,12 +60,12 @@ export default class PTBWidgetPlugin extends Plugin {
 			"props": {},
 			"element": Grid
 		},
-		"timer": {
+		/*"timer": {
 			"props": {
 				service: this.timerService
 			},
 			"element": Timer
-		},
+		},*/
 		"today": {
 			"props": {},
 			"element": Today
