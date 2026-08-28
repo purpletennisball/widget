@@ -132,8 +132,9 @@
 .ptbGridWidget {
 	display: grid;
   	grid-template-columns: repeat(1, 1fr);
-	gap: 8px;
+	gap: 10px;
 	align-items: start;
+	margin-bottom: 10px;
 }
 
 .block-language-widgety {
@@ -146,7 +147,7 @@
 	}
 }
 
-@container widgetBlock (min-width: 700px) {
+@container widgetBlock (min-width: 650px) {
 	.ptbGridWidget {
 		grid-template-columns: repeat(3, 1fr);
 	}
