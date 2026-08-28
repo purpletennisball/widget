@@ -79,6 +79,13 @@
 .calendarGrid, .weekdays {
   	display: grid;
   	grid-template-columns: auto auto auto auto auto auto auto;
+	font-size: .9rem;
+}
+
+@container widget (max-width: 250px) {
+	.calendarGrid, .weekdays {
+		font-size: .8rem !important;
+	}
 }
 
 .calendarGrid {
