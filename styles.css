@@ -1,3 +1,21 @@
+:root {
+	--neutral-98: #F9FAFB;
+	--neutral-95: #F0F2F5;
+	--neutral-90: #E1E6EA;
+	--neutral-60: #8F99A3;
+	--neutral-40: #5F666D;
+	--neutral-20: #313335;
+	--neutral-0: #000000;
+}
+
+.theme-light {
+	--widget-background: var(--neutral-98);
+}
+
+.theme-dark {
+	--widget-background: var(--neutral-20);
+}
+
 .weight {
 	font-size: 1.5rem;
 	font-weight: bold;
@@ -24,7 +42,7 @@
 .ptbWidgetShapeBasic {
 	max-width: 400px;
 	aspect-ratio: 1 / 1;
-	background: var(--background-secondary);
+	background: var(--widget-background);
 	border-radius: 38px;
 }
 
@@ -130,7 +148,7 @@
 .ptbWeightPill {
 	display: flex;
 	flex-direction: row;
-	background: var(--background-secondary);
+	background: var(--widget-background);
 	border-radius: 38px;
 	padding: 20px;
 	align-items: center;
