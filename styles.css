@@ -62,6 +62,7 @@
 .weightDiff {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 .weightGood {
@@ -141,7 +142,7 @@
   	container: widgetBlock / inline-size;
 }
 
-@container widgetBlock (min-width: 420px) {
+@container widgetBlock (min-width: 400px) {
 	.ptbGridWidget {
 		grid-template-columns: repeat(2, 1fr);
 	}
@@ -173,6 +174,15 @@
 
 .ptbWeightPill .weight {
 	flex-grow: 1;
+}
+
+.weightDiffPill, .weightDiff {
+	font-size: 0.8rem;
+}
+
+.weightDiff > .lucide-icon {
+	height: 1rem;
+    width: min-content;
 }
 
 .weightDiffPill {
@@ -219,20 +229,25 @@
 	}
 }
 
-.title {
+.titleContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	gap: 4px;
 }
 
-.title * {
+.title {
 	margin: 0px;
 	line-height: 1;
+	font-size: 1rem;
+	font-weight: bold;
 }
 
 .subtitle {
-	color: var(--text-muted)
+	margin: 0px;
+	line-height: 1;
+	color: var(--text-muted);
+	font-size: 0.9rem;
 }
 
 .iconAndTitle {

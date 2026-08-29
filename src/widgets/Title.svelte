@@ -7,11 +7,11 @@
 	let { title, subtitle }: Props = $props();
 </script>
 
-<div class="title">
+<div class="titleContainer">
 {#if subtitle}
-	<h3>{title}</h3>
+	<span class="title">{title}</span>
 	<span class="subtitle">{subtitle}</span>
 {:else}
-	<h1>{title}</h1>
+	<span class="title">{title}</span>
 {/if}
 </div>
