@@ -13,7 +13,6 @@ import MonthWidget from './widgets/month/MonthWidget.svelte';
 import Weight from './widgets/weight/Weight.svelte';
 import WeightPill from './widgets/weight/WeightPill.svelte';
 import Grid from './widgets/grid/Grid.svelte';
-import Timer from './widgets/timer/Timer.svelte';
 import Today from './widgets/today/Today.svelte';
 import { CalendarService } from './CalendarService';
 import { TimerService } from './widgets/timer/TimerService'

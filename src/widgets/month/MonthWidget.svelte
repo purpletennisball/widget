@@ -8,19 +8,19 @@
 	let { service }: Props = $props();
 
 	let date = new Date()
-	let days = service.getDaysInMonthByDate(date)
-	var gridItems: string[] = []
+	let days = $derived(service.getDaysInMonthByDate(date))
+	let gridItems = $derived.by(() => {
+		const items: string[] = []
+		for (let i = 0; i != date.getDay()+1; i++) {
+  			items.push("")
+		}
+		for (let i = 0; i != days; i++) {
+  			items.push((i+1).toString())
+		}
+		return items
+	})
 	var today: string = date.getDate().toString()
 	const fullMonth = date.toLocaleString('default', { month: 'long' });
-
-
-	for (let i = 0; i != date.getDay()+1; i++) {
-  		gridItems.push("")
-	}
-
-	for (let i = 0; i != days; i++) {
-  		gridItems.push((i+1).toString())
-	}
 </script>
 
 <div class="ptbWidget ptbWidgetShapeBasic ptbMonth">
