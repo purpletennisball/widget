@@ -437,3 +437,26 @@ body {
 .countTitle {
 	color: var(--text-muted)
 }
+
+.ptbClock {
+	display: flex;
+	flex-direction: column;
+	gap: 0px;
+	justify-content: center;
+    align-items: center;
+}
+
+.clock > .count {
+	justify-content: center;
+	flex-grow: 0;
+	line-height: 1;
+}
+
+.clock {
+	display: flex;
+	flex-direction: row;
+}
+
+.clockDate {
+	color: var(--text-muted);
+}

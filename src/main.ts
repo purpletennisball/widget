@@ -18,6 +18,7 @@ import { CalendarService } from './CalendarService';
 import { TimerService } from './widgets/timer/TimerService'
 import { CounterService } from './widgets/counter/CounterService';
 import Counter from './widgets/counter/Counter.svelte';
+import Clock from './widgets/clock/Clock.svelte';
 
 interface Widget {
 	props: { [key: string]: unknown }
@@ -77,6 +78,10 @@ export default class PTBWidgetPlugin extends Plugin {
 				service: this.counterService
 			},
 			"element": Counter
+		},
+		"clock": {
+			"props": {},
+			"element": Clock
 		}
 	}}
 
