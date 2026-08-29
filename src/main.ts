@@ -119,31 +119,11 @@ export default class PTBWidgetPlugin extends Plugin {
 
 		let props = widget.props
 
-		// TODO: Refine this.
 		for (let option of options) {
-			if (option.startsWith("date")) {
-				let YMD = option.split(" ")[1]
-				if (YMD) {
-					props.date = YMD
-				}
-			}
-			if (option.startsWith("id")) {
-				let id = option.split(" ")[1]
-				if (id) {
-					props.id = id
-				}
-			}
-			if (option.startsWith("title")) {
-				let title = option.replace("title ", "")
-				if (title) {
-					props.title = title
-				}
-			}
-			if (option.startsWith("idType")) {
-				let idType = option.replace("idType ", "")
-				if (idType) {
-					props.idType = idType
-				}
+			let optionName = option.split(" ")[0]
+			let optionValue = option.replace(`${optionName} `, "")
+			if (optionName) {
+				props[optionName] = optionValue
 			}
 		}
 
