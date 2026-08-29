@@ -17,6 +17,8 @@ import Timer from './widgets/timer/Timer.svelte';
 import Today from './widgets/today/Today.svelte';
 import { CalendarService } from './CalendarService';
 import { TimerService } from './widgets/timer/TimerService'
+import { CounterService } from './widgets/counter/CounterService';
+import Counter from './widgets/counter/Counter.svelte';
 
 interface Widget {
 	props: { [key: string]: unknown }
@@ -36,6 +38,7 @@ export default class PTBWidgetPlugin extends Plugin {
 	public weightService!: WeightService;
 	public calendarService!: CalendarService;
 	public timerService!: TimerService;
+	public counterService!: CounterService;
 
 	public get WIDGETS(): { [key: string]: Widget } { return {
 		"weight": {
@@ -69,6 +72,12 @@ export default class PTBWidgetPlugin extends Plugin {
 		"today": {
 			"props": {},
 			"element": Today
+		},
+		"counter": {
+			"props": {
+				service: this.counterService
+			},
+			"element": Counter
 		}
 	}}
 
@@ -106,11 +115,30 @@ export default class PTBWidgetPlugin extends Plugin {
 
 		let props = widget.props
 
+		// TODO: Refine this.
 		for (let option of options) {
 			if (option.startsWith("date")) {
 				let YMD = option.split(" ")[1]
 				if (YMD) {
 					props.date = YMD
+				}
+			}
+			if (option.startsWith("id")) {
+				let id = option.split(" ")[1]
+				if (id) {
+					props.id = id
+				}
+			}
+			if (option.startsWith("title")) {
+				let title = option.replace("title ", "")
+				if (title) {
+					props.title = title
+				}
+			}
+			if (option.startsWith("idType")) {
+				let idType = option.replace("idType ", "")
+				if (idType) {
+					props.idType = idType
 				}
 			}
 		}
@@ -124,11 +152,16 @@ export default class PTBWidgetPlugin extends Plugin {
 		this.weightService = new WeightService(this.app, this.settings);
 		this.calendarService = new CalendarService(this.app, this.settings)
 		this.timerService = new TimerService(this.app, this.settings)
+		this.counterService = new CounterService(this)
 
 		this.registerMarkdownCodeBlockProcessor("widgety", (source, el, ctx) => {
 			el.empty();
 
+			const currentFile = this.app.vault.getFileByPath(ctx.sourcePath);
+
 			let [widget, props] = this.parseOptions(source)
+
+			props.currentFile = currentFile
 
 			mount(widget.element, {
 				target: el,
