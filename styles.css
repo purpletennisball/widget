@@ -201,6 +201,8 @@ body {
 	display: flex;
 	align-items: center;
 	justify-self: center;
+	justify-content: center;
+	width: 20px;
 }
 
 .weekdays * {
