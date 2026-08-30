@@ -480,3 +480,15 @@ body {
 .clockDate {
 	color: var(--text-muted);
 }
+
+.cm-lang-widgety .embed-actions {
+	display: none !important;
+}
+
+.cm-lang-widgety:hover {
+	box-shadow: none !important;
+}
+
+.cm-lang-widgety {
+	cursor: default !important;
+}
