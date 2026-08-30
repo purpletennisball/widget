@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { CalendarService } from "../../CalendarService";
 	import Title from "../Title.svelte";
 	import NoWeight from "./NoWeight.svelte";
 	import WeightDifferenceView from "./WeightDifferenceView.svelte";
@@ -12,7 +13,7 @@
 
 	let { service, date }: Props = $props();
 
-	let materialDate = $derived(date ? service.formatYMD(date) : new Date())
+	let materialDate = $derived(date ? CalendarService.formatYMD(date) : new Date())
 	let subtitle = $derived(date ? `for ${date}` : undefined)
 
 	let weight = $derived(service.getWeightForDate(materialDate)?.weight)

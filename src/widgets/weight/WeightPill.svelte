@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { CalendarService } from "../../CalendarService";
 	import NoWeight from "./NoWeight.svelte";
 	import WeightDifferenceView from './WeightDifferenceView.svelte'
 	import WeightIcon from "./WeightIcon.svelte";
@@ -11,7 +12,7 @@
 	
 	let { service, date }: Props = $props();
 
-	let materialDate = $derived(date ? service.formatYMD(date) : new Date())
+	let materialDate = $derived(date ? CalendarService.formatYMD(date) : new Date())
 
 	let weight = $derived(service.getWeightForDate(materialDate)?.weight)
 	let weightUnit = "lbs"; // CHANGE THIS

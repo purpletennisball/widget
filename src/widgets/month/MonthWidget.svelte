@@ -1,17 +1,21 @@
 <script lang="ts">
-	import type { CalendarService } from "../../CalendarService";
+	import { CalendarService } from "../../CalendarService";
 
 	interface Props {
 		service: CalendarService;
+		date: string;
   	}
 
-	let { service }: Props = $props();
+	let { service, date }: Props = $props();
 
-	let date = new Date()
-	let days = $derived(service.getDaysInMonthByDate(date))
+	var dateFormatted: Date = $derived(
+		date ? CalendarService.formatYMD(date) : new Date()
+	)
+
+	let days = $derived(service.getDaysInMonthByDate(dateFormatted))
 	let gridItems = $derived.by(() => {
 		const items: string[] = []
-		for (let i = 0; i != date.getDay()+1; i++) {
+		for (let i = 0; i != dateFormatted.getDay()+1; i++) {
   			items.push("")
 		}
 		for (let i = 0; i != days; i++) {
@@ -19,8 +23,8 @@
 		}
 		return items
 	})
-	var today: string = date.getDate().toString()
-	const fullMonth = date.toLocaleString('default', { month: 'long' });
+	var today: string = $derived(dateFormatted.getDate().toString())
+	const fullMonth = $derived(dateFormatted.toLocaleString('default', { month: 'long' }));
 </script>
 
 <div class="ptbWidget ptbWidgetShapeBasic ptbMonth">

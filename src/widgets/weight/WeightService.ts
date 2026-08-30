@@ -1,5 +1,6 @@
 import { App, TFile } from "obsidian";
 import type { PTBWidgetPluginSettings } from "../../settings";
+import { CalendarService } from "../../CalendarService";
 
 export enum WeightDiffDate {
 	Yesterday = "yesterday",
@@ -77,20 +78,12 @@ export class WeightService {
 		return weightHistory[0]; 
 	}
 
-	formatYMD(dateString: string): Date {
-		const [year, month, day] = dateString.split('-').map(Number) as [number, number, number];
-
-		let date = new Date(year, month - 1, day);
-		date.setHours(23, 59, 59, 0);
-		return date;
-	}
-
 	getFileCTime(file: TFile): number {
 		if (this.settings.dateSetting === 'custom-property') {
 			let dateValue: unknown = this.app.metadataCache.getFileCache(file)?.frontmatter?.[this.settings.dateProperty];
 
 			if (typeof dateValue === "string") {
-				return this.formatYMD(dateValue).getTime();
+				return CalendarService.formatYMD(dateValue).getTime();
 			}
 		}
 		let date = new Date(file.stat.ctime);
