@@ -364,6 +364,12 @@ body {
 	font-size: 2.5rem;
 }
 
+@container widget (max-width: 200px) {
+	.todayDetails {
+		font-size: 2rem;
+	}
+}
+
 .todayWeekday {
 	color: var(--color-red);
 }
@@ -380,16 +386,16 @@ body {
 }
 
 .todayNumber {
-	font-size: 8rem;
+	font-size: calc(100cqw - 50px);
 	font-weight: bold;
-	line-height: 1;
+	line-height: 0.9;
 }
 
-@container widget (max-width: 250px) {
+/*@container widget (max-width: 250px) {
 	.todayNumber {
 		font-size: 6rem;
 	}
-}
+}*/
 
 .ptbCounter {
 	display: flex;
