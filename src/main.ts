@@ -12,7 +12,6 @@ import { mount, type Component } from 'svelte';
 import { WeightService } from './widgets/weight/WeightService';
 import MonthWidget from './widgets/month/MonthWidget.svelte';
 import Weight from './widgets/weight/Weight.svelte';
-import WeightPill from './widgets/weight/WeightPill.svelte';
 import Grid from './widgets/grid/Grid.svelte';
 import Today from './widgets/today/Today.svelte';
 import { CalendarService } from './CalendarService';
@@ -45,14 +44,16 @@ export default class PTBWidgetPlugin extends Plugin {
 		"weight": {
 			"props": {
 				service: this.weightService,
+				pilled: false
 			},
 			"element": Weight
 		},
 		"weight-pill": {
 			"props": {
 				service: this.weightService,
+				pilled: true
 			},
-			"element": WeightPill
+			"element": Weight
 		},
 		"month": {
 			"props": {

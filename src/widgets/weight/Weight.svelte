@@ -9,9 +9,10 @@
 	interface Props {
 		service: WeightService;
 		date: string;
+		pilled: boolean
   	}
 
-	let { service, date }: Props = $props();
+	let { service, date, pilled }: Props = $props();
 
 	let materialDate = $derived(date ? CalendarService.formatYMD(date) : new Date())
 	let subtitle = $derived(date ? `for ${date}` : undefined)
@@ -22,6 +23,24 @@
 
 </script>
 
+{#if pilled}
+<div class="ptbWidget ptbWeightPill">
+	<WeightIcon/>
+	<div class="weightData">
+		{#if !weight}
+			<NoWeight date={date} />
+		{:else}
+			<div class="weightValue">
+				<span class="miniWeight">{weight.oppositeText(service.preferredWeightUnit)}</span>
+				<span class="weight">{weight.preferredText(service.preferredWeightUnit)}</span>
+			</div>
+		{/if}
+		{#each diffs as diff}
+			<WeightDifferenceView diff={diff} pilled={true} />
+		{/each}
+	</div>
+</div>
+{:else}
 <div class="ptbWidget ptbWidgetShapeBasic ptbWeight ptbWidgetsWidgetFrame">
 	<div class="iconAndTitle">
 	<WeightIcon/>
@@ -43,3 +62,4 @@
 		{/each}
 	</div>
 </div>
+{/if}
