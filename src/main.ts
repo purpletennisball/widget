@@ -1,5 +1,6 @@
 import {
 	Plugin,
+	type MarkdownPostProcessorContext,
 } from 'obsidian';
 import {
 	DEFAULT_SETTINGS,
@@ -75,7 +76,8 @@ export default class PTBWidgetPlugin extends Plugin {
 		},
 		"counter": {
 			"props": {
-				service: this.counterService
+				service: this.counterService,
+				app: this.app
 			},
 			"element": Counter
 		},
@@ -117,7 +119,7 @@ export default class PTBWidgetPlugin extends Plugin {
 			return [widget, props]
 		}
 
-		let props = widget.props
+		let props = { ...widget.props }
 
 		for (let option of options) {
 			let optionName = option.split(" ")[0]
@@ -138,7 +140,11 @@ export default class PTBWidgetPlugin extends Plugin {
 		this.timerService = new TimerService(this.app, this.settings)
 		this.counterService = new CounterService(this)
 
-		this.registerMarkdownCodeBlockProcessor("widgety", (source, el, ctx) => {
+		this.registerMarkdownCodeBlockProcessor("widgety", (
+			source,
+			el: HTMLElement, 
+			ctx: MarkdownPostProcessorContext
+		) => {
 			el.empty();
 
 			const currentFile = this.app.vault.getFileByPath(ctx.sourcePath);
@@ -146,6 +152,8 @@ export default class PTBWidgetPlugin extends Plugin {
 			let [widget, props] = this.parseOptions(source)
 
 			props.currentFile = currentFile
+			props.ctx = ctx
+			props.el = el
 
 			mount(widget.element, {
 				target: el,

@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { TFile } from "obsidian";
+	import type { App, MarkdownPostProcessorContext, TFile } from "obsidian";
 	import type { CounterService, CounterFetch } from "./CounterService";
 	import { Plus, Minus } from "lucide-svelte"
-	import NumberFlow from '@number-flow/svelte'	
+	import NumberFlow from '@number-flow/svelte'
+	import CounterOnboard from "./CounterOnboard.svelte";
 
 	interface Props {
 		service: CounterService;
@@ -10,13 +11,21 @@
 		title: string;
 		idType: string;
 		currentFile: TFile;
+		ctx?: MarkdownPostProcessorContext;
+		el: HTMLElement;
+		index?: number;
+		app: App;
   	}
 
-	let { service, title, id, idType, currentFile }: Props = $props();
+	let { service, title, id, idType, currentFile, ctx, el, index, app }: Props = $props();
 
 	let counterType = $derived(
 		idType === "global" || idType === "prop" ? idType : "prop"
 	);
+
+	let needsSetup = $derived(
+		!title || !id
+	)
 
 	let fetch: CounterFetch = $derived({
 		id: id,
@@ -44,6 +53,9 @@
 </script>
 
 <div class="ptbWidget ptbWidgetShapeBasic ptbCounter">
+	{#if needsSetup}
+		<CounterOnboard ctx={ctx} el={el} index={index} app={app} currentFile={currentFile}/>
+	{:else}
 	<div class="counterDetails">
 	<span class="countTitle">{displayTitle}</span>
 	<NumberFlow class="count" value={value}/>
@@ -56,4 +68,5 @@
 			<Minus/>
 		</button>
 	</div>
+	{/if}
 </div>
