@@ -295,6 +295,7 @@ body {
 
 .ptbWeightPill .weight {
 	flex-grow: 1;
+	line-height: 1;
 }
 
 .weightDiffPill, .weightDiff {
@@ -650,4 +651,17 @@ body {
 
 .toolbarSpacer {
 	height: 48px;
+}
+
+.weightValue {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.miniWeight {
+	margin: 0px;
+	line-height: 1;
+	color: var(--neutral-text-muted);
+	font-size: 0.9rem;
 }

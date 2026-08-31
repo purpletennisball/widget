@@ -33,7 +33,10 @@
 				<NoWeight date={date} />
 			</span>
 		{:else}
-			<span class="weight">{weight.preferredText(service.preferredWeightUnit)}</span>
+			<div class="weightValue">
+				<span class="miniWeight">{weight.oppositeText(service.preferredWeightUnit)}</span>
+				<span class="weight">{weight.preferredText(service.preferredWeightUnit)}</span>
+			</div>
 		{/if}
 		{#each diffs as diff}
 			<WeightDifferenceView diff={diff} pilled={false} />

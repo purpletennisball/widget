@@ -84,6 +84,10 @@ export class WeightUnit {
 	static oppositeUnit(unit: string): string {
 		return unit == "lbs" ? "kg" : "lbs"
 	}
+
+	oppositeText(unit: string): string {
+		return this.preferredText(WeightUnit.oppositeUnit(unit))
+	}
 }
 
 export interface WeightLog {
