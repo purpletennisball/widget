@@ -4,6 +4,7 @@
 	import Title from "../Title.svelte";
 	import SelectionBox from "../SelectionBox.svelte";
 	import type { App, MarkdownPostProcessorContext, TFile } from "obsidian";
+	import IconButton from "../IconButton.svelte";
 
 	interface Props {
 		ctx?: MarkdownPostProcessorContext;
@@ -116,7 +117,7 @@
 			</div>
 			<div class="bottomToolbar">
 				<input type="text" name="Counter Name" bind:value={counterName} class="flexGrow1 widgetyInput">
-				<button onclick={nextTab} class="widgetyButton"><ArrowRight /></button>
+				<IconButton onclick={nextTab}><ArrowRight /></IconButton>
 			</div>
 		</div>
 
@@ -126,7 +127,7 @@
 			</div>
 			<div class="bottomToolbar">
 				<input type="text" name="Counter ID" bind:value={counterID} class="flexGrow1 widgetyInput">
-				<button onclick={nextTab} class="widgetyButton"><ArrowRight /></button>
+				<IconButton onclick={nextTab}><ArrowRight /></IconButton>
 			</div>
 		</div>
 
@@ -144,7 +145,7 @@
 			<div class="toolbarSpacer"></div>
 			</div>
 			<div class="bottomToolbar">
-				<button onclick={finish} class="widgetyButton"><Check /></button>
+				<IconButton onclick={finish}><Check /></IconButton>
 			</div>
 		</div>
 	</div>

@@ -4,6 +4,7 @@
 	import { Plus, Minus } from "lucide-svelte"
 	import NumberFlow from '@number-flow/svelte'
 	import CounterOnboard from "./CounterOnboard.svelte";
+	import IconButton from "../IconButton.svelte";
 
 	interface Props {
 		service: CounterService;
@@ -61,12 +62,8 @@
 	<NumberFlow class="count" value={value}/>
 	</div>
 	<div class="counterActions">
-		<button class="counterIncrementAction" onclick={inc}>
-			<Plus/>
-		</button>
-		<button class="counterDeincrementAction" onclick={deinc}>
-			<Minus/>
-		</button>
+		<IconButton onclick={inc} flexGrowing={true}><Plus /></IconButton>
+		<IconButton onclick={deinc} variant="secondary" flexGrowing={true}><Minus /></IconButton>
 	</div>
 	{/if}
 </div>

@@ -434,27 +434,6 @@ body {
 	gap: 8px;
 }
 
-.counterActions > button {
-	flex-grow: 1;
-	height: 32px;
-	border-radius: 16px;
-    transition: flex-grow 0.3s var(--smooth-transition);
-}
-
-.counterDeincrementAction {
-	background-color: var(--accent-20) !important;
-	color: var(--accent-80) !important;
-}
-
-.counterIncrementAction {
-	background-color: var(--accent-80) !important;
-	color: var(--accent-20) !important;
-}
-
-.counterActions > button:hover {
-  	flex-grow: 4;
-}
-
 .count {
 	font-size: 5rem;
 	line-height: 1;
@@ -592,6 +571,21 @@ body {
 	color: var(--accent-20) !important;
 	border-radius: 32px;
 	padding: 0px;
+	corner-shape: round;
+}
+
+.widgetyButton-secondary {
+	background-color: var(--accent-20) !important;
+	color: var(--accent-80) !important;
+}
+
+.flexGrowingButtonStyle {
+	flex-grow: 1;
+    transition: flex-grow 0.3s var(--smooth-transition);
+}
+
+.flexGrowingButtonStyle:hover {
+  	flex-grow: 4;
 }
 
 .flexGrow1 {
