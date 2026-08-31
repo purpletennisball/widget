@@ -6,12 +6,14 @@ export interface PTBWidgetPluginSettings {
 	dateSetting: string;
 	dateProperty: string;
 	highlightSetting: string;
+	preferredWeightUnit: string;
 }
 
 export const DEFAULT_SETTINGS: PTBWidgetPluginSettings = {
 	dateSetting: 'creation',
 	dateProperty: 'date',
-	highlightSetting: 'none'
+	highlightSetting: 'none',
+	preferredWeightUnit: 'lbs'
 };
 
 export const highlightSetting = writable(DEFAULT_SETTINGS.highlightSetting);
@@ -61,6 +63,18 @@ export class SettingTab extends PluginSettingTab {
 								gainIsBad: 'Gain is red, loss is green',
 								lossIsBad: 'Gain is green, loss is red',
 								none: 'No highlighting',
+							},
+						},
+					},
+					{
+						name: 'Preferred weight unit',
+						desc: 'Use kilograms or pounds.',
+						control: {
+							type: 'dropdown',
+							key: 'preferredWeightUnit',
+							options: {
+								lbs: 'lbs',
+								kg: 'kg',
 							},
 						},
 					},

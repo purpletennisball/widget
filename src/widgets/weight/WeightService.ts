@@ -7,9 +7,88 @@ export enum WeightDiffDate {
 	LastWeek = "last week",
 }
 
+export class WeightUnit {
+	pounds: number;
+	get kilograms(): number {
+		return WeightUnit.poundsToKilograms(this.pounds)
+	}
+
+	preferredUnit(unit: string): number {
+		switch (unit) {
+		case "lbs": {
+			return this.pounds
+		}
+		case "kg": {
+			return this.kilograms
+		}
+		}
+		return this.pounds
+	}
+
+	get poundsText(): string {
+		return `${this.pounds.toFixed(1)}lbs`
+	}
+
+	get kilogramsText(): string {
+		return `${this.kilograms.toFixed(1)}kg`
+	}
+
+	preferredText(unit: string): string {
+		switch (unit) {
+		case "lbs": {
+			return this.poundsText
+		}
+		case "kg": {
+			return this.kilogramsText
+		}
+		}
+		return this.poundsText
+	}
+
+	constructor(pounds: number) {
+		this.pounds = pounds;
+	}
+
+	static pounds(unit: number): WeightUnit {
+		return new WeightUnit(unit)
+	}
+
+	static kilograms(unit: number): WeightUnit {
+		return new WeightUnit(WeightUnit.kilogramsToPounds(unit))
+	}
+
+	static preferredUnit(value: number, unit: string): WeightUnit {
+		switch (unit) {
+		case "lbs": {
+			return WeightUnit.pounds(value)
+		}
+		case "kg": {
+			return WeightUnit.kilograms(value)
+		}
+		}
+		return WeightUnit.pounds(value)
+	}
+
+	static poundsToKilograms(pounds: number): number {
+		return pounds * 0.45359237
+	}
+
+	static kilogramsToPounds(kilograms: number): number {
+		return kilograms * 2.20462
+	}
+	
+	static diff(left: WeightUnit, right: WeightUnit): WeightUnit {
+		return WeightUnit.pounds(left.pounds - right.pounds)
+	}
+
+	static oppositeUnit(unit: string): string {
+		return unit == "lbs" ? "kg" : "lbs"
+	}
+}
+
 export interface WeightLog {
 	file: TFile;
-	weight: number;
+	weight: WeightUnit;
 	ctime: number;
 }
 
@@ -40,11 +119,13 @@ export class WeightService {
 			return []
 		}
 
+		const unit = this.preferredWeightUnit
+
 		if (weightForDate?.ctime !== weightForYesterday?.ctime && weightForYesterday) {
 			diffs.push({
 				date: WeightDiffDate.Yesterday,
 				weightLog: weightForYesterday,
-				diff: weightForDate && weightForYesterday ? weightForDate.weight - weightForYesterday.weight : undefined,
+				diff: weightForDate && weightForYesterday ? WeightUnit.diff(weightForDate.weight, weightForYesterday.weight).preferredUnit(unit) : undefined,
 			});
 		}
 
@@ -52,7 +133,7 @@ export class WeightService {
 			diffs.push({
 				date: WeightDiffDate.LastWeek,
 				weightLog: weightForLastWeek,
-				diff: weightForDate && weightForLastWeek ? weightForDate.weight - weightForLastWeek.weight : undefined,
+				diff: weightForDate && weightForLastWeek ? WeightUnit.diff(weightForDate.weight, weightForLastWeek.weight).preferredUnit(unit) : undefined,
 			});
 		}
 
@@ -115,10 +196,14 @@ export class WeightService {
 			
 		const weightLogs: WeightLog[] = rawWeights.map(note => ({
 			file: note.file,
-			weight: note.weight,
+			weight: WeightUnit.preferredUnit(note.weight, this.preferredWeightUnit),
 			ctime: this.getFileCTime(note.file),
 		}));
 
 		return weightLogs.sort((a, b) => b.ctime - a.ctime);
+	}
+
+	get preferredWeightUnit(): string {
+		return this.settings.preferredWeightUnit
 	}
 }

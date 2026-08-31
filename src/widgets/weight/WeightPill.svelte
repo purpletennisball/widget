@@ -15,7 +15,6 @@
 	let materialDate = $derived(date ? CalendarService.formatYMD(date) : new Date())
 
 	let weight = $derived(service.getWeightForDate(materialDate)?.weight)
-	let weightUnit = "lbs"; // CHANGE THIS
 
 	let diffs = $derived(service.getWeightDiffs(materialDate))
 </script>
@@ -26,7 +25,7 @@
 		{#if !weight}
 			<NoWeight date={date} />
 		{:else}
-			<span class="weight">{weight}{weightUnit}</span>
+			<span class="weight">{weight.preferredText(service.preferredWeightUnit)}</span>
 		{/if}
 		{#each diffs as diff}
 			<WeightDifferenceView diff={diff} pilled={true} />
