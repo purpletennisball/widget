@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { App, MarkdownPostProcessorContext, TFile } from "obsidian";
 	import type { CounterService, CounterFetch } from "./CounterService";
-	import { Plus, Minus } from "lucide-svelte"
+	import { Plus, Minus, Settings, X, Check } from "lucide-svelte"
 	import NumberFlow from '@number-flow/svelte'
 	import CounterOnboard from "./CounterOnboard.svelte";
 	import IconButton from "../IconButton.svelte";
+	import Modal from "../Modal.svelte";
+	import Title from "../Title.svelte";
 
 	interface Props {
 		service: CounterService;
@@ -51,9 +53,45 @@
 	async function deinc() {
 		value = await service.deincrement(fetch);
 	}
+
+	let showSettings = $state(false);
+
+	function toggleSettingsPanel() {
+		showSettings = !showSettings;
+	}
 </script>
 
 <div class="ptbWidget ptbWidgetShapeBasic ptbCounter">
+	<div class="overlayTopBar">
+		<IconButton variant="muted" onclick={toggleSettingsPanel}>
+			<Settings/>
+		</IconButton>
+	</div>
+	<Modal bind:showModal={showSettings}>
+		<div class="toolbar">
+			<IconButton variant="muted" onclick={toggleSettingsPanel}>
+				<X/>
+			</IconButton>
+			<Title title="Counter Settings"/>
+			<IconButton>
+				<Check/>
+			</IconButton>
+		</div>
+		<div class="modalContent">
+			<div class="settingRow">
+				<span class="settingLabel">Title</span>
+				<input type="text" value={displayTitle} class="widgetyInput"/>
+			</div>
+			<div class="settingRow">
+				<span class="settingLabel">ID</span>
+				<input type="text" value={id} class="widgetyInput"/>
+			</div>
+			<div class="settingRow">
+				<span class="settingLabel">Scope</span>
+				<input type="text" value={idType} class="widgetyInput"/>
+			</div>
+		</div>
+	</Modal>
 	{#if needsSetup}
 		<CounterOnboard ctx={ctx} el={el} index={index} app={app} currentFile={currentFile}/>
 	{:else}
