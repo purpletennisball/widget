@@ -95,7 +95,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
 */
 
-body {
+body, .ptbWidget {
 	--neutral-98: #F9FAFB;
 	--neutral-95: #F0F2F5;
 	--neutral-90: #E1E6EA;
@@ -762,4 +762,54 @@ body {
 
 .gap8 {
 	gap: 8px;
+}
+
+.accentOverride-red {
+	--accent-h: 0;
+	--accent-s: 100%;
+}
+
+.accentOverride-orange {
+	--accent-h: 30;
+	--accent-s: 100%;
+}
+
+.accentOverride-yellow {
+	--accent-h: 60;
+	--accent-s: 80%;
+}
+
+.accentOverride-green {
+	--accent-h: 100;
+	--accent-s: 100%;
+}
+
+.accentOverride-teal {
+	--accent-h: 160;
+	--accent-s: 100%;
+}
+
+.accentOverride-light-blue {
+	--accent-h: 200;
+	--accent-s: 100%;
+}
+
+.accentOverride-blue {
+	--accent-h: 240;
+	--accent-s: 100%;
+}
+
+.accentOverride-purple {
+	--accent-h: 260;
+	--accent-s: 100%;
+}
+
+.accentOverride-pink {
+	--accent-h: 300;
+	--accent-s: 100%;
+}
+
+.accentOverride-magenta {
+	--accent-h: 330;
+	--accent-s: 100%;
 }

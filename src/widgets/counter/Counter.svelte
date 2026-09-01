@@ -20,9 +20,10 @@
 		el: HTMLElement;
 		index?: number;
 		app: App;
+		theme: 'accent' | 'red' | 'orange' | 'yellow' | 'green' | 'teal' | 'light-blue' | 'blue' | 'purple' | 'pink' | 'magenta';
   	}
 
-	let { service, title, id, idType, currentFile, ctx, el, index, app }: Props = $props();
+	let { service, title, id, idType, currentFile, ctx, el, index, app, theme }: Props = $props();
 
 	let counterType = $derived(
 		idType === "global" || idType === "prop" ? idType : "prop"
@@ -30,6 +31,10 @@
 
 	let needsSetup = $derived(
 		!title || !id
+	)
+
+	let accent = $derived(
+		theme !== undefined ? theme : "accent"
 	)
 
 	let fetch: CounterFetch = $derived({
@@ -68,7 +73,7 @@
 			currentFile,
 			ctx,
 			el,
-			(widgetContent) =>  `counter\ntitle ${counterName}\nid ${counterID}\nidType ${counterIDType}\n`,
+			(widgetContent) =>  `counter\ntitle ${counterName}\nid ${counterID}\nidType ${counterIDType}\ntheme ${accent}\n`,
 			index,
 		);
 
@@ -80,7 +85,7 @@
 	let counterIDType = $derived(idType);
 </script>
 
-<div class="ptbWidget ptbWidgetShapeBasic ptbCounter">
+<div class={["ptbWidget ptbWidgetShapeBasic ptbCounter", `accentOverride-${accent}`]}>
 	<div class="overlayTopBar">
 		<div class="flexGrow1"></div>
 		<IconButton variant="muted" onclick={toggleSettingsPanel}>
