@@ -122,8 +122,8 @@
 	<NumberFlow class="count" value={value}/>
 	</div>
 	<div class="counterActions">
-		<IconButton onclick={inc} flexGrowing={true}><Plus /></IconButton>
-		<IconButton onclick={deinc} variant="secondary" flexGrowing={true}><Minus /></IconButton>
+		<IconButton onclick={inc} flexGrowing shapeMorphing><Plus /></IconButton>
+		<IconButton onclick={deinc} variant="secondary" flexGrowing shapeMorphing><Minus /></IconButton>
 	</div>
 	{/if}
 </div>

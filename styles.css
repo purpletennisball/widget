@@ -569,9 +569,11 @@ body {
 	width: 32px;
 	background-color: var(--accent-80) !important;
 	color: var(--accent-20) !important;
-	border-radius: 32px;
+	border-radius: 16px;
 	padding: 0px;
 	corner-shape: round;
+	transition: flex-grow 0.3s var(--smooth-transition),
+				border-radius 0.3s var(--smooth-transition);
 }
 
 .widgetyButton-secondary {
@@ -664,11 +666,18 @@ body {
 
 .flexGrowingButtonStyle {
 	flex-grow: 1;
-    transition: flex-grow 0.3s var(--smooth-transition);
+}
+
+.shapeMorphingButtonStyle:active {
+	border-radius: 8px;
 }
 
 .flexGrowingButtonStyle:hover {
   	flex-grow: 4;
+}
+
+.shapeMorphingButtonStyle.flexGrowingButtonStyle:active {
+	flex-grow: 10;
 }
 
 .flexGrow1 {

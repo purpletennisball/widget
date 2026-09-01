@@ -6,18 +6,20 @@
 		variant?: 'primary' | 'secondary' | 'muted';
 		children?: Snippet;
 		flexGrowing?: boolean;
+		shapeMorphing?: boolean;
 	}
 	let { 
 		variant = 'primary', 
 		children, 
 		class: className = '',
 		flexGrowing,
+		shapeMorphing,
 		...restProps 
 	}: Props = $props();
 </script>
 
 <button 
-	class={["widgetyButton", `widgetyButton-${variant}`, `${className}`, flexGrowing && "flexGrowingButtonStyle"]} 
+	class={["widgetyButton", `widgetyButton-${variant}`, `${className}`, flexGrowing && "flexGrowingButtonStyle", shapeMorphing && "shapeMorphingButtonStyle"]} 
 	{...restProps}
 >
 	{@render children?.()}
