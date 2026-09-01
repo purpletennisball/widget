@@ -40,7 +40,7 @@
 			currentFile,
 			ctx,
 			el,
-			(widgetContent) => widgetContent + `\ntitle ${counterName}\nid ${counterID}\nidType ${counterType}`,
+			(widgetContent) => widgetContent + `title ${counterName}\nid ${counterID}\nidType ${counterType}\n`,
 			index,
 		);
 	}
