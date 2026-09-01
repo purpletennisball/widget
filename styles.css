@@ -592,7 +592,7 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.ptbWidget:hover:not(.ptbGridWidget) .overlayTopBar {
+.ptbWidget:hover:not(.ptbGridWidget):not(:has(.counterOnboard)) .overlayTopBar {
 	visibility: visible;
 	opacity: 1;
 }
