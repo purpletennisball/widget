@@ -742,3 +742,15 @@ body {
 	color: var(--neutral-text-muted);
 	font-size: 0.9rem;
 }
+
+.flex {
+	display: flex;
+}
+
+.flexColumn {
+	flex-direction: column;
+}
+
+.gap8 {
+	gap: 8px;
+}

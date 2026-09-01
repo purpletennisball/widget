@@ -6,6 +6,8 @@
 	import type { App, MarkdownPostProcessorContext, TFile } from "obsidian";
 	import IconButton from "../IconButton.svelte";
 	import { updateWidgetContent as updateWidgetContentInFile } from "../widgetContent";
+	import Counter from "./Counter.svelte";
+	import CounterScopeSelection from "./CounterScopeSelection.svelte";
 
 	interface Props {
 		ctx?: MarkdownPostProcessorContext;
@@ -92,12 +94,7 @@
 			<div class="tabContent">
 			<Title title="Scope" />
 			<div class="selectionBoxes">
-			<SelectionBox bind:value={counterType} key={"prop"}>
-				<Title title="Property" subtitle="Saves data in the file properties." />
-			</SelectionBox>
-			<SelectionBox bind:value={counterType} key={"global"}>
-				<Title title="Global" subtitle="Saves data in the plugin file. Keeps value the same across notes." />
-			</SelectionBox>
+			<CounterScopeSelection bind:value={counterType} />
 			</div>
 			<div class="toolbarSpacer"></div>
 			</div>

@@ -8,6 +8,7 @@
 	import Modal from "../Modal.svelte";
 	import Title from "../Title.svelte";
 	import { updateWidgetContent as updateWidgetContentInFile } from "../widgetContent";
+	import CounterScopeSelection from "./CounterScopeSelection.svelte";
 
 	interface Props {
 		service: CounterService;
@@ -67,7 +68,7 @@
 			currentFile,
 			ctx,
 			el,
-			(widgetContent) =>  `counter\ntitle ${counterName}\nid ${counterID}\nidType ${counterType}`,
+			(widgetContent) =>  `counter\ntitle ${counterName}\nid ${counterID}\nidType ${counterIDType}\n`,
 			index,
 		);
 
@@ -107,7 +108,9 @@
 			</div>
 			<div class="settingRow">
 				<span class="settingLabel">Scope</span>
-				<input type="text" bind:value={counterIDType} class="widgetyInput"/>
+				<div class="flex flexColumn gap8">
+					<CounterScopeSelection bind:value={counterIDType} />
+				</div>
 			</div>
 		</div>
 	</Modal>
