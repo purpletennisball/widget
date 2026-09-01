@@ -1,6 +1,7 @@
 import {
 	Plugin,
 	type MarkdownPostProcessorContext,
+	type TFile,
 } from 'obsidian';
 import {
 	DEFAULT_SETTINGS,
@@ -19,6 +20,7 @@ import { TimerService } from './widgets/timer/TimerService'
 import { CounterService } from './widgets/counter/CounterService';
 import Counter from './widgets/counter/Counter.svelte';
 import Clock from './widgets/clock/Clock.svelte';
+import { updateWidgetContent as updateWidgetContentInFile } from './widgets/widgetContent';
 
 interface Widget {
 	props: { [key: string]: unknown }
@@ -87,6 +89,16 @@ export default class PTBWidgetPlugin extends Plugin {
 			"element": Clock
 		}
 	}}
+
+	public async updateWidgetContent(
+		currentFile: TFile,
+		ctx: MarkdownPostProcessorContext | undefined,
+		el: HTMLElement,
+		updateWidget: (widgetContent: string, widgetLines: string[]) => string,
+		index?: number,
+	): Promise<void> {
+		await updateWidgetContentInFile(this.app, currentFile, ctx, el, updateWidget, index);
+	}
 
 	parseGridProps(source: string): { [key: string]: unknown } {
 		// Remove "grid" line.

@@ -579,6 +579,89 @@ body {
 	color: var(--accent-80) !important;
 }
 
+.widgetyButton-muted {
+	background-color: var(--widget-content) !important;
+	color: var(--neutral-40) !important;
+}
+
+.overlayTopBar {
+	position: absolute;
+	display: flex;
+	visibility: hidden;
+	opacity: 0;
+    transition: opacity 0.3s ease;
+	width: 100cqw;
+}
+
+.ptbWidget:hover:not(.ptbGridWidget):not(:has(.counterOnboard)) .overlayTopBar {
+	visibility: visible;
+	opacity: 1;
+}
+
+.widgetyModal {
+	border: none;
+	background-color: var(--widget-background) !important;
+	border-radius: 32px;
+	overflow: hidden;
+	padding: 16px;
+	min-width: 400px;
+	gap: 8px;
+  	transform: scale(0.75);
+	transition: transform 0.3s var(--smooth-transition),
+		backdrop-filter 0.3s var(--smooth-transition);
+}
+
+.widgetyModal[open] {
+	display: flex;
+	flex-direction: column;
+	transform: scale(1);
+	box-shadow: var(--shadow-l);
+}
+
+@starting-style {
+  	.widgetyModal[open] {
+		transform: scale(0.75);
+	}
+}
+
+.toolbar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.toolbar .titleContainer {
+	flex-grow: 1;
+	text-align: center;
+}
+
+.buttonSpacer {
+	width: 32px;
+	height: 32px;
+}
+
+.settingRow {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+
+.settingRow .settingLabel {
+	width: 100px;
+}
+
+.settingRow .widgetyInput {
+	flex-grow: 1;
+}
+
+.modalContent {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
 .flexGrowingButtonStyle {
 	flex-grow: 1;
     transition: flex-grow 0.3s var(--smooth-transition);
@@ -658,4 +741,16 @@ body {
 	line-height: 1;
 	color: var(--neutral-text-muted);
 	font-size: 0.9rem;
+}
+
+.flex {
+	display: flex;
+}
+
+.flexColumn {
+	flex-direction: column;
+}
+
+.gap8 {
+	gap: 8px;
 }
