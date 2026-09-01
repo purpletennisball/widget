@@ -81,6 +81,7 @@
 
 <div class="ptbWidget ptbWidgetShapeBasic ptbCounter">
 	<div class="overlayTopBar">
+		<div class="flexGrow1"></div>
 		<IconButton variant="muted" onclick={toggleSettingsPanel}>
 			<Settings/>
 		</IconButton>
