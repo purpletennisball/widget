@@ -605,11 +605,22 @@ body {
 	padding: 16px;
 	min-width: 400px;
 	gap: 8px;
+  	transform: scale(0.75);
+	transition: transform 0.3s var(--smooth-transition),
+		backdrop-filter 0.3s var(--smooth-transition);
 }
 
-dialog[open] {
+.widgetyModal[open] {
 	display: flex;
 	flex-direction: column;
+	transform: scale(1);
+	box-shadow: var(--shadow-l);
+}
+
+@starting-style {
+  	.widgetyModal[open] {
+		transform: scale(0.75);
+	}
 }
 
 .toolbar {
