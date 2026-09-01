@@ -70,6 +70,8 @@
 			(widgetContent) =>  `counter\ntitle ${counterName}\nid ${counterID}\nidType ${counterType}`,
 			index,
 		);
+
+		toggleSettingsPanel();
 	}
 
 	let counterName = $derived(title);
