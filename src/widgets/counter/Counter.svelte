@@ -7,6 +7,7 @@
 	import IconButton from "../IconButton.svelte";
 	import Modal from "../Modal.svelte";
 	import Title from "../Title.svelte";
+	import { updateWidgetContent as updateWidgetContentInFile } from "../widgetContent";
 
 	interface Props {
 		service: CounterService;
@@ -59,6 +60,21 @@
 	function toggleSettingsPanel() {
 		showSettings = !showSettings;
 	}
+
+	async function updateSettings() {
+		await updateWidgetContentInFile(
+			app,
+			currentFile,
+			ctx,
+			el,
+			(widgetContent) =>  `counter\ntitle ${counterName}\nid ${counterID}\nidType ${counterType}`,
+			index,
+		);
+	}
+
+	let counterName = $derived(title);
+	let counterID = $derived(id);
+	let counterIDType = $derived(idType);
 </script>
 
 <div class="ptbWidget ptbWidgetShapeBasic ptbCounter">
@@ -73,22 +89,22 @@
 				<X/>
 			</IconButton>
 			<Title title="Counter Settings"/>
-			<IconButton>
+			<IconButton onclick={updateSettings}>
 				<Check/>
 			</IconButton>
 		</div>
 		<div class="modalContent">
 			<div class="settingRow">
 				<span class="settingLabel">Title</span>
-				<input type="text" value={displayTitle} class="widgetyInput"/>
+				<input type="text" bind:value={counterName} class="widgetyInput"/>
 			</div>
 			<div class="settingRow">
 				<span class="settingLabel">ID</span>
-				<input type="text" value={id} class="widgetyInput"/>
+				<input type="text" bind:value={counterID} class="widgetyInput"/>
 			</div>
 			<div class="settingRow">
 				<span class="settingLabel">Scope</span>
-				<input type="text" value={idType} class="widgetyInput"/>
+				<input type="text" bind:value={counterIDType} class="widgetyInput"/>
 			</div>
 		</div>
 	</Modal>

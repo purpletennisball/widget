@@ -5,6 +5,7 @@
 	import SelectionBox from "../SelectionBox.svelte";
 	import type { App, MarkdownPostProcessorContext, TFile } from "obsidian";
 	import IconButton from "../IconButton.svelte";
+	import { updateWidgetContent as updateWidgetContentInFile } from "../widgetContent";
 
 	interface Props {
 		ctx?: MarkdownPostProcessorContext;
@@ -34,58 +35,14 @@
 	}
 
 	async function finish() {
-		const markdownContext = ctx?.getSectionInfo(el)
-
-		if (!markdownContext) {
-			// show error
-			return
-		}
-
-		var relevantLines = markdownContext.text.split(/\r?\n/).slice(
-			markdownContext.lineStart,
-			markdownContext.lineEnd + 1
-		).join('\n');
-
-		var strippedContent = relevantLines;
-
-		strippedContent = strippedContent.replace("grid\n", "")
-		strippedContent = strippedContent.replace("```widgety\n", "")
-		strippedContent = strippedContent.replace("```", "")
-
-		// Split by empty lines and filter out empty options
-		let widgetLines = strippedContent.split(/\r?\n\s*\r?\n/).filter(option => option.trim() !== '');
-
-
-		var widgetContent: string | undefined = undefined
-		if (index) {
-			let updateWidgetContent = widgetLines[index]
-			if (updateWidgetContent) {
-				widgetContent = updateWidgetContent
-			}
-		} else {
-			widgetContent = strippedContent
-		}
-
-		if (!widgetContent) {
-			return
-		}
-
-		let newWidgetContent = widgetContent + `title ${counterName}\nid ${counterID}\nidType ${counterType}\n`
-
-		var newWidget: string;
-		if (index) {
-			let newWidgetLines = widgetLines
-			newWidgetLines[index] = newWidgetContent
-			newWidget = "```widgety\ngrid\n" + widgetLines.join("\n\n") + "```"
-		} else {
-			newWidget = relevantLines.replace(widgetContent, newWidgetContent)
-		}
-
-		let updatedFileContents = markdownContext.text.replace(relevantLines, newWidget)
-
-		await app.vault.process(currentFile, (content) => {
-			return updatedFileContents
-		});
+		await updateWidgetContentInFile(
+			app,
+			currentFile,
+			ctx,
+			el,
+			(widgetContent) => widgetContent + `\ntitle ${counterName}\nid ${counterID}\nidType ${counterType}`,
+			index,
+		);
 	}
 
 	function calcTabClasses(id: number): string[] {
