@@ -35,6 +35,14 @@ class InvalidWidgetError extends Error {
 	}
 }
 
+export enum WidgetSize {
+	Pill = "pill",
+	Small = "small",
+	Medium = "medium",
+	Tall = "tall",
+	Large = "large",
+}
+
 export default class PTBWidgetPlugin extends Plugin {
 	settings!: PTBWidgetPluginSettings;
 	public weightService!: WeightService;

@@ -165,6 +165,31 @@ body, .ptbWidget {
 	overflow: hidden;
 }
 
+.widgety-small {
+	max-width: 400px;
+	aspect-ratio: 1 / 1;
+	background: var(--widget-background);
+	border-radius: 32px;
+	padding: 16px;
+	overflow: hidden;
+}
+
+.widgety-medium {
+	background: var(--widget-background);
+	border-radius: 32px;
+	padding: 16px;
+	overflow: hidden;
+  	grid-column-end: span 2;
+}
+
+.widgety-tall {
+	background: var(--widget-background);
+	border-radius: 32px;
+	padding: 16px;
+	overflow: hidden;
+  	grid-row-end: span 2;
+}
+
 .weightIcon {
 	aspect-ratio: 1 / 1;
 	width: 32px;
@@ -257,6 +282,8 @@ body, .ptbWidget {
 	gap: 10px;
 	align-items: start;
 	margin-bottom: 10px;
+	justify-items: stretch;
+	align-items: stretch;
 }
 
 .block-language-widgety {
@@ -416,9 +443,30 @@ body, .ptbWidget {
 	}
 }*/
 
-.ptbCounter {
+.widgety-Counter {
 	display: flex;
 	flex-direction: column;	
+}
+
+.widgety-medium.widgety-Counter {
+	flex-direction: row;
+}
+
+.widgety-medium.widgety-Counter .overlayTopBar {
+	flex-direction: row-reverse;
+}
+
+.widgety-medium.widgety-Counter .counterActions {
+	flex-grow: 1;
+	flex-direction: column;
+}
+
+.widgety-medium.widgety-Counter .counterDetails {
+	flex-grow: 1;
+}
+
+.widgety-medium.widgety-Counter .counterActions > * {
+	width: auto;
 }
 
 .counterDetails {

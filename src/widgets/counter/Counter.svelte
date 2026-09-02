@@ -9,6 +9,7 @@
 	import Title from "../Title.svelte";
 	import { updateWidgetContent as updateWidgetContentInFile } from "../widgetContent";
 	import CounterScopeSelection from "./CounterScopeSelection.svelte";
+	import Widget from "../Widget.svelte";
 
 	interface Props {
 		service: CounterService;
@@ -21,9 +22,10 @@
 		index?: number;
 		app: App;
 		theme: 'accent' | 'red' | 'orange' | 'yellow' | 'green' | 'teal' | 'light-blue' | 'blue' | 'purple' | 'pink' | 'magenta';
+		size?: 'small' | 'medium';
   	}
 
-	let { service, title, id, idType, currentFile, ctx, el, index, app, theme }: Props = $props();
+	let { service, title, id, idType, currentFile, ctx, el, index, app, theme, size = 'small' }: Props = $props();
 
 	let counterType = $derived(
 		idType === "global" || idType === "prop" ? idType : "prop"
@@ -73,7 +75,7 @@
 			currentFile,
 			ctx,
 			el,
-			(widgetContent) =>  `counter\ntitle ${counterName}\nid ${counterID}\nidType ${counterIDType}\ntheme ${accent}\n`,
+			(widgetContent) => `counter\ntitle ${counterName}\nid ${counterID}\nidType ${counterIDType}\ntheme ${accent}\nsize ${size}\n`,
 			index,
 		);
 
@@ -85,7 +87,7 @@
 	let counterIDType = $derived(idType);
 </script>
 
-<div class={["ptbWidget ptbWidgetShapeBasic ptbCounter", `accentOverride-${accent}`]}>
+<Widget size={size} id="Counter" class={`accentOverride-${accent}`}>
 	<div class="overlayTopBar">
 		<div class="flexGrow1"></div>
 		<IconButton variant="muted" onclick={toggleSettingsPanel}>
@@ -131,4 +133,4 @@
 		<IconButton onclick={deinc} variant="secondary" flexGrowing shapeMorphing><Minus /></IconButton>
 	</div>
 	{/if}
-</div>
+</Widget>
