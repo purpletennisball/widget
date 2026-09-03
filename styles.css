@@ -180,6 +180,7 @@ body, .ptbWidget {
 	padding: 16px;
 	overflow: hidden;
   	grid-column-end: span 2;
+	aspect-ratio: 2.05;
 }
 
 .widgety-tall {
@@ -278,28 +279,17 @@ body, .ptbWidget {
 
 .ptbGridWidget {
 	display: grid;
-  	grid-template-columns: repeat(1, 1fr);
+  	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	gap: 10px;
 	align-items: start;
 	margin-bottom: 10px;
 	justify-items: stretch;
 	align-items: stretch;
+	grid-auto-flow: dense;
 }
 
 .block-language-widgety {
   	container: widgetBlock / inline-size;
-}
-
-@container widgetBlock (min-width: 400px) {
-	.ptbGridWidget {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@container widgetBlock (min-width: 650px) {
-	.ptbGridWidget {
-		grid-template-columns: repeat(3, 1fr);
-	}
 }
 
 .ptbWeightPill {
