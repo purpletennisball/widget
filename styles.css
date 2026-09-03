@@ -447,12 +447,12 @@ body, .ptbWidget {
 }
 
 .widgety-medium.widgety-Counter .counterActions {
-	flex-grow: 1;
+	flex: 1;
 	flex-direction: column;
 }
 
 .widgety-medium.widgety-Counter .counterDetails {
-	flex-grow: 1;
+	flex: 1;
 }
 
 .widgety-medium.widgety-Counter .counterActions > * {
