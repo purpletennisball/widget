@@ -1,5 +1,8 @@
 import {
+	Editor,
+	MarkdownView,
 	Plugin,
+	type MarkdownFileInfo,
 	type MarkdownPostProcessorContext,
 	type TFile,
 } from 'obsidian';
@@ -21,6 +24,7 @@ import { CounterService } from './widgets/counter/CounterService';
 import Counter from './widgets/counter/Counter.svelte';
 import Clock from './widgets/clock/Clock.svelte';
 import { updateWidgetContent as updateWidgetContentInFile } from './widgets/widgetContent';
+import { WidgetSuggestModal } from './WidgetSuggest';
 
 interface Widget {
 	props: { [key: string]: unknown }
@@ -182,6 +186,21 @@ export default class PTBWidgetPlugin extends Plugin {
 			});
 		});
 
+		this.addCommand({
+			id: "insert-widgety",
+			name: "Insert widget",
+			editorCallback: (editor: Editor, ctx: MarkdownView | MarkdownFileInfo) => {
+				new WidgetSuggestModal(editor, this).open();
+			},
+		});
+
+		this.addRibbonIcon("square-plus", "Insert widget", (evt: MouseEvent) => {
+			const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
+			if (activeView) {
+				new WidgetSuggestModal(activeView.editor, this).open();
+			}
+		});
+
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new SettingTab(this.app, this));
 	}
@@ -209,3 +228,4 @@ export default class PTBWidgetPlugin extends Plugin {
 		await this.saveData(this.settings);
 	}
 }
+
