@@ -12,10 +12,10 @@
 	let isUp = $derived((diff.diff ?? 0) > 0);
 	let color = $derived.by(() => {
 		if ($highlightSetting === 'gainIsBad') {
-			return isUp ? 'weightBad' : 'weightGood';
+			return isUp ? 'accentOverride-red' : 'accentOverride-green';
 		}
 		if ($highlightSetting === 'lossIsBad') {
-			return isUp ? 'weightGood' : 'weightBad';
+			return isUp ? 'accentOverride-green' : 'accentOverride-red';
 		}
 		return '';
 	});
