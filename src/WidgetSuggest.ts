@@ -4,12 +4,9 @@ import {
 	FuzzySuggestModal,
 } from "obsidian";
 import type PTBWidgetPlugin from "./main";
+import type { Widget } from "./main";
 
-interface WidgetOption {
-	name: string;
-}
-
-export class WidgetSuggestModal extends FuzzySuggestModal<WidgetOption> {
+export class WidgetSuggestModal extends FuzzySuggestModal<Widget> {
 	constructor(
 		private editor: Editor,
 		private plugin: PTBWidgetPlugin
@@ -17,18 +14,16 @@ export class WidgetSuggestModal extends FuzzySuggestModal<WidgetOption> {
 		super(plugin.app);
 	}
 
-	getItems(): WidgetOption[] {
-		return Array.from(Object.keys(this.plugin.WIDGETS)).map((widgetName) => ({
-			name: widgetName,
-		}));
+	getItems(): Widget[] {
+		return Object.values(this.plugin.WIDGETS);
 	}
 
-	getItemText(item: WidgetOption): string {
-		return item.name;
+	getItemText(item: Widget): string {
+		return item.displayName;
 	}
 
-	onChooseItem(item: WidgetOption): void {
-		let content = `\n\`\`\`widgety\n${item.name}\n\`\`\`\n`;
+	onChooseItem(item: Widget): void {
+		let content = `\n\`\`\`widgety\n${item.id}\n\`\`\`\n`;
 
 		this.editor.replaceRange(
 			content,

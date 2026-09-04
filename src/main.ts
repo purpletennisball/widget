@@ -26,9 +26,11 @@ import Clock from './widgets/clock/Clock.svelte';
 import { updateWidgetContent as updateWidgetContentInFile } from './widgets/widgetContent';
 import { WidgetSuggestModal } from './WidgetSuggest';
 
-interface Widget {
+export interface Widget {
 	props: { [key: string]: unknown }
 	element: Component<Record<string, unknown>>
+	displayName: string
+	id: string
 }
 
 class InvalidWidgetError extends Error {
@@ -60,24 +62,32 @@ export default class PTBWidgetPlugin extends Plugin {
 				service: this.weightService,
 				pilled: false
 			},
-			"element": Weight
+			"element": Weight,
+			"displayName": "Weight",
+			"id": "weight"
 		},
 		"weight-pill": {
 			"props": {
 				service: this.weightService,
 				pilled: true
 			},
-			"element": Weight
+			"element": Weight,
+			"displayName": "Weight (Pill)",
+			id: "weight-pill"
 		},
 		"month": {
 			"props": {
 				service: this.calendarService,
 			},
-			"element": MonthWidget
+			"element": MonthWidget,
+			"displayName": "Month",
+			id: "month"
 		},
 		"grid": {
 			"props": {},
-			"element": Grid
+			"element": Grid,
+			"displayName": "Grid",
+			id: "grid"
 		},
 		/*"timer": {
 			"props": {
@@ -87,18 +97,24 @@ export default class PTBWidgetPlugin extends Plugin {
 		},*/
 		"today": {
 			"props": {},
-			"element": Today
+			"element": Today,
+			"displayName": "Today",
+			id: "today"
 		},
 		"counter": {
 			"props": {
 				service: this.counterService,
 				app: this.app
 			},
-			"element": Counter
+			"element": Counter,
+			"displayName": "Counter",
+			id: "counter"
 		},
 		"clock": {
 			"props": {},
-			"element": Clock
+			"element": Clock,
+			"displayName": "Clock",
+			id: "clock"
 		}
 	}}
 
