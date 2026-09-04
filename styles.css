@@ -473,7 +473,7 @@ body, .ptbWidget {
 }
 
 .count {
-	font-size: 5rem;
+	font-size: 6rem;
 	line-height: 1;
 	font-family: 'Google Sans Flex';
 	font-variation-settings: "wdth" 50, "ROND" 100;
@@ -484,7 +484,29 @@ body, .ptbWidget {
 
 @container widget (max-width: 250px) {
 	.count {
-    	font-size: 4rem;
+    	font-size: 5rem;
+	}
+}
+
+@container widget (max-width: 190px) {
+	.count {
+    	font-size: 3.5rem;
+	}
+}
+
+@container widget (max-width: 140px) {
+	.count {
+    	font-size: 2.5rem;
+	}
+
+	.countTitle {
+    	font-size: 0.9rem;
+	}
+}
+
+@container widget (min-width: 700px) {
+	.count {
+    	font-size: 10rem;
 	}
 }
 
