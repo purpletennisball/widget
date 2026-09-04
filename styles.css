@@ -464,6 +464,7 @@ body, .ptbWidget {
 	flex-direction: column;
 	align-items: center;
 	flex-grow: 1;
+	container: counterDetails / inline-size;
 }
 
 .counterActions {
@@ -482,19 +483,41 @@ body, .ptbWidget {
 	align-items: center;
 }
 
-@container widget (max-width: 250px) {
+@container widget (max-width: 300px) {
+	.clock .count {
+    	font-size: 4rem;
+	}
+}
+
+@container widget (max-width: 175px) {
+	.clock .count {
+    	font-size: 3rem;
+	}
+}
+
+@container counterDetails (max-width: 240px) {
 	.count {
     	font-size: 5rem;
 	}
 }
 
-@container widget (max-width: 190px) {
+@container counterDetails (max-width: 200px) {
 	.count {
-    	font-size: 3.5rem;
+    	font-size: 4rem;
 	}
 }
 
-@container widget (max-width: 140px) {
+@container counterDetails (max-width: 150px) {
+	.count {
+    	font-size: 3.5rem;
+	}
+
+	.countTitle {
+    	font-size: 0.9rem;
+	}
+}
+
+@container counterDetails (max-width: 140px) {
 	.count {
     	font-size: 2.5rem;
 	}
@@ -504,7 +527,7 @@ body, .ptbWidget {
 	}
 }
 
-@container widget (min-width: 700px) {
+@container counterDetails (min-width: 400px) {
 	.count {
     	font-size: 10rem;
 	}
